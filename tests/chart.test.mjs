@@ -6,8 +6,8 @@ function record(date,oi,net,change=null) {
   return {date,openInterest:oi,spreading:10,...Object.fromEntries(GROUPS.map(g=>[g.id,{long:40,short:20,net,change:change===null?null:{long:5,short:-2,net:change}}]))};
 }
 test('favorite ticker order maps to distinct reports, including E-mini Dow and Mexican peso',()=>{
-  assert.deepEqual(QUICK_MARKETS.map(code=>FUTURES[code][0]),['ES','NQ','RTY','YM','GC','SI','PA','PL','HG','CL','NG','HO','RB','DX','6A','6B','6C','6E','6J','6M','6S','VX','ZB','ZC','ZL','ZM','ZO','ZS','ZW','BTC','ETH','SOL','XRP']);
-  assert.equal(new Set(QUICK_MARKETS).size,33);
+  assert.deepEqual(QUICK_MARKETS.map(code=>FUTURES[code][0]),['ES','NQ','RTY','YM','GC','SI','PA','PL','HG','CL','NG','HO','RB','DX','6A','6B','6C','6E','6J','6M','6S','VX','ZB','ZC','ZL','ZM','ZS','ZW','BTC','ETH','SOL','XRP']);
+  assert.equal(new Set(QUICK_MARKETS).size,32);
   const index={latestDate:'2026-10-06',markets:[
     {code:'124603',name:'DJIA x $5 - CHICAGO BOARD OF TRADE',latestDate:'2026-10-06'},
     {code:'12460+',name:'DJIA Consolidated - CHICAGO BOARD OF TRADE',latestDate:'2026-10-06'},

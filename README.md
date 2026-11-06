@@ -18,7 +18,7 @@ If a write step is rejected by repository policy, verify **Settings → Actions 
 
 ## What you can do
 
-- Select favorite futures with one-click ticker boxes in this fixed order: ES, NQ, RTY, YM, GC, SI, PA, PL, HG, CL, NG, HO, RB, DX, 6A, 6B, 6C, 6E, 6J, 6M, 6S, VX, ZB, ZC, ZL, ZM, ZO, ZS, ZW, BTC, ETH, SOL, XRP. Each box shows only the latest Commercials COT index in muted red, rounded to a whole percentage and always using the 26-report lookback (about six months). Search, sector filters, and historical chart selections do not hide favorites or change their latest values; older reports show their date.
+- Select favorite futures with one-click ticker boxes in this fixed order: ES, NQ, RTY, YM, GC, SI, PA, PL, HG, CL, NG, HO, RB, DX, 6A, 6B, 6C, 6E, 6J, 6M, 6S, VX, ZB, ZC, ZL, ZM, ZS, ZW, BTC, ETH, SOL, XRP. Each box shows only the latest Commercials COT index in muted red, rounded to a whole percentage and always using the 26-report lookback (about six months). Search, sector filters, and historical chart selections do not hide favorites or change their latest values; older reports show their date.
 - Search by exchange root symbol (CL, GC, ZC, etc.) or commodity name. The default **Main futures** selector uses an explicit CFTC-code-to-symbol mapping; choose **All CFTC markets** for additional aggregates. Unmapped reports retain their names and CFTC codes rather than invented tickers. YM maps to the CBOT DJIA x $5 (E-mini Dow) report; 6M maps to the CME Mexican peso report.
 - See net positioning for large speculators, small speculators, and commercials.
 - Compare changes in net positions, longs, and shorts between reports.
