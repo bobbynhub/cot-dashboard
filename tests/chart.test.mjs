@@ -6,8 +6,8 @@ function record(date,oi,net,change=null) {
   return {date,openInterest:oi,spreading:10,...Object.fromEntries(GROUPS.map(g=>[g.id,{long:40,short:20,net,change:change===null?null:{long:5,short:-2,net:change}}]))};
 }
 test('favorite ticker order maps to distinct reports, including E-mini Dow and Mexican peso',()=>{
-  assert.deepEqual(QUICK_MARKETS.map(code=>FUTURES[code][0]),['ES','NQ','RTY','YM','GC','SI','PA','PL','HG','CL','NG','HO','RB','DX','6A','6B','6C','6E','6J','6M','6S','VX','ZB','ZC','ZL','ZM','ZO','ZS','ZW']);
-  assert.equal(new Set(QUICK_MARKETS).size,29);
+  assert.deepEqual(QUICK_MARKETS.map(code=>FUTURES[code][0]),['ES','NQ','RTY','YM','GC','SI','PA','PL','HG','BTC','ETH','SOL','XRP','CL','NG','HO','RB','DX','6A','6B','6C','6E','6J','6M','6S','VX','ZB','ZC','ZL','ZM','ZO','ZS','ZW']);
+  assert.equal(new Set(QUICK_MARKETS).size,33);
   const index={latestDate:'2026-10-06',markets:[
     {code:'124603',name:'DJIA x $5 - CHICAGO BOARD OF TRADE',latestDate:'2026-10-06'},
     {code:'12460+',name:'DJIA Consolidated - CHICAGO BOARD OF TRADE',latestDate:'2026-10-06'},
@@ -159,4 +159,28 @@ test('rounding notice and CSV expose signed discrepancies without altering count
   assert.equal(second[headers.indexOf('net_balance')],'2');
   assert.equal(first.length,headers.length);
   assert.equal(second.length,headers.length);
+});
+
+test('crypto reports are available in favorites, selectors and the main overview without combining contracts',()=>{
+  const codes=['133741','146021','177LM1','176740'];
+  const index={latestDate:'2026-10-27',markets:[
+    ...codes.map(code=>({code,name:FUTURES[code][1],category:'Other',latestDate:'2026-10-27'})),
+    {code:'177LM3',name:'NANO SOLANA PERP STYLE - COINBASE DERIVATIVES, LLC',category:'Other',latestDate:'2026-10-27'},
+    {code:'176741',name:'MICRO XRP - CHICAGO MERCANTILE EXCHANGE',category:'Other',latestDate:'2025-12-23'}
+  ]};
+  for(const [i,ticker] of ['BTC','ETH','SOL','XRP'].entries()){
+    assert(QUICK_MARKETS.includes(codes[i]));
+    assert.deepEqual(matchingMarkets(index,{query:ticker,category:'Financial'}).map(m=>m.code),[codes[i]]);
+    assert.deepEqual(overviewMarkets(index,{query:ticker}).map(m=>m.code),[codes[i]]);
+  }
+  assert.equal(marketInfo(index.markets[2]).exchange,'Coinbase Derivatives');
+  assert.equal(marketInfo(index.markets[2]).name,'Nano Solana');
+  assert.equal(overviewMarkets(index).length,4);
+  assert.equal(overviewMarkets(index,{mainOnly:false}).length,6);
+  const missing={...index,markets:index.markets.filter(m=>m.code!=='177LM1')};
+  assert.equal(matchingMarkets(missing,{query:'SOL'}).length,0);
+  const inactive={...index,latestDate:'2026-11-03'};
+  assert.equal(matchingMarkets(inactive,{query:'XRP'}).length,0);
+  assert.deepEqual(matchingMarkets(inactive,{query:'XRP',activeOnly:false}).map(m=>m.code),['176740']);
+  assert.deepEqual(overviewMarkets(inactive,{query:'XRP'}).map(m=>m.code),['176740']);
 });

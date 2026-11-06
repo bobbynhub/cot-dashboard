@@ -55,14 +55,17 @@ export const FUTURES = {
   '134741':['SR3','3-month SOFR','CME','Financial'],
   '133741':['BTC','Bitcoin','CME','Financial'],
   '146021':['ETH','Ether','CME','Financial'],
+  // Legacy has Coinbase Nano Solana, not a CME Solana report. Keep identities separate.
+  '177LM1':['SOL','Nano Solana','Coinbase Derivatives','Financial'],
+  '176740':['XRP','XRP','CME','Financial'],
   '133742':['MBT','Micro bitcoin','CME','Financial'],
   '146022':['MET','Micro ether','CME','Financial'],
   '1170E1':['VX','VIX','CFE','Financial']
 };
-export const QUICK_MARKETS = ['13874A','209742','239742','124603','088691','084691','075651','076651','085692','067651','023651','022651','111659','098662','232741','096742','090741','099741','097741','095741','092741','1170E1','020601','002602','007601','026603','004603','005602','001602'];
+export const QUICK_MARKETS = ['13874A','209742','239742','124603','088691','084691','075651','076651','085692','133741','146021','177LM1','176740','067651','023651','022651','111659','098662','232741','096742','090741','099741','097741','095741','092741','1170E1','020601','002602','007601','026603','004603','005602','001602'];
 const MAIN_OVERVIEW_TICKERS = new Set([
   'ES','NQ','RTY','YM','GC','SI','PA','PL','HG',
-  'BTC','ETH','CL','NG','HO','RB',
+  'BTC','ETH','SOL','XRP','CL','NG','HO','RB',
   '6A','6B','6C','6E','6J','6M','6S','DX',
   'VX','ZB','ZF','ZN','ZT',
   'CC','CT','KC','LBR','OJ','SB','HE','LE',
